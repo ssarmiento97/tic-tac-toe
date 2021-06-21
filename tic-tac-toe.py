@@ -37,9 +37,15 @@ def get_input(player, current_board):
             selection = input("Player 1 please select where you would like to place your 'X' (1-9): ")
 
             if not selection.isdigit():
-                print("Please enter a number between 1-9!")
-            elif int(selection) in acceptable_range:
-                in_range = True
+                print("Please enter only digits!")
+            else:
+                if int(selection) in acceptable_range:
+                    if current_board[int(selection) - 1] == ' ':
+                        in_range = True
+                    else:
+                        print("That spot has already been filled. Please select another!")
+                else:
+                    print("Please enter a number 1-9!")
         
         current_board[int(selection) - 1] = 'X'
     else:
@@ -47,9 +53,15 @@ def get_input(player, current_board):
             selection = input("Player 2 please select where you would like to place your 'O' (1-9): ")
 
             if not selection.isdigit():
-                print("Please enter a number between 1-9!")
-            elif int(selection) in acceptable_range:
-                    in_range = True
+                print("Please enter only digits!")
+            else:
+                if int(selection) in acceptable_range:
+                    if current_board[int(selection) - 1] == ' ':
+                        in_range = True
+                    else:
+                        print("That spot has already been filled. Please select another!")
+                else:
+                    print("Please enter a number 1-9!")
 
         current_board[int(selection) - 1] = 'O'
 
@@ -66,6 +78,12 @@ def check_board(current_board):
     elif current_board[0] == current_board[4] == current_board[8] and current_board[4] != ' ':
         return current_board[0]
     elif current_board[2] == current_board[4] == current_board[6] and current_board[4] != ' ':
+        return current_board[2]
+    elif current_board[0] == current_board[3] == current_board[6] and current_board[0] != ' ':
+        return current_board[0]
+    elif current_board[1] == current_board[4] == current_board[7] and current_board[1] != ' ':
+        return current_board[1]
+    elif current_board[2] == current_board[5] == current_board[8] and current_board[2] != ' ':
         return current_board[2]
     else:
         # verify if there are any moves left
