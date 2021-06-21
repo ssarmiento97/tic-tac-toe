@@ -33,7 +33,7 @@ def get_input(player, current_board):
     in_range = False
 
     if player % 2 == 1:
-        while not selection.isdigit() or in_range:
+        while not selection.isdigit() or not in_range:
             selection = input("Player 1 please select where you would like to place your 'X' (1-9): ")
 
             if not selection.isdigit():
@@ -41,9 +41,9 @@ def get_input(player, current_board):
             elif int(selection) in acceptable_range:
                 in_range = True
         
-        current_board[selection - 1] = 'X'
+        current_board[int(selection) - 1] = 'X'
     else:
-        while not selection.isdigit() or in_range:
+        while not selection.isdigit() or not in_range:
             selection = input("Player 2 please select where you would like to place your 'O' (1-9): ")
 
             if not selection.isdigit():
@@ -51,21 +51,21 @@ def get_input(player, current_board):
             elif int(selection) in acceptable_range:
                     in_range = True
 
-        current_board[selection - 1] = 'O'
+        current_board[int(selection) - 1] = 'O'
 
     return current_board
     
 def check_board(current_board):
     # check if anyone has won
-    if current_board[0] == current_board[1] == current_board[2]:
+    if current_board[0] == current_board[1] == current_board[2] and current_board[1] != ' ':
         return current_board[0]
-    elif current_board[3] == current_board[4] == current_board[5]:
+    elif current_board[3] == current_board[4] == current_board[5] and current_board[4] != ' ':
         return current_board[3]
-    elif current_board[6] == current_board[7] == current_board[8]:
+    elif current_board[6] == current_board[7] == current_board[8] and current_board[7] != ' ':
         return current_board[6]
-    elif current_board[0] == current_board[4] == current_board[8]:
+    elif current_board[0] == current_board[4] == current_board[8] and current_board[4] != ' ':
         return current_board[0]
-    elif current_board[2] == current_board[4] == current_board[6]:
+    elif current_board[2] == current_board[4] == current_board[6] and current_board[4] != ' ':
         return current_board[2]
     else:
         # verify if there are any moves left
@@ -119,5 +119,5 @@ while True:
         else:
             break
     else:
-        print(f"Error. Invalid game_state: {game_state}")
-        break
+        print(f"invalid game-state: {game_state}")
+    
